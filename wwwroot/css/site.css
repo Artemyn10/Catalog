@@ -1,22 +1,99 @@
-html {
-  font-size: 14px;
-}
-
-@media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
-}
-
-.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
-}
-
-html {
-  position: relative;
-  min-height: 100%;
-}
-
 body {
-  margin-bottom: 60px;
+    font-family: "Segoe UI", sans-serif;
+    background-color: #fff8f0;
+}
+
+header {
+    background-color: #ff8c00;
+    color: white;
+    padding: 20px 0;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+}
+
+.navbar-brand {
+    font-weight: bold;
+    font-size: 1.5rem;
+}
+
+    .navbar a:hover {
+        text-decoration: underline;
+    }
+
+footer {
+    background-color: #ff8c00;
+    color: white;
+    padding: 10px;
+    text-align: center;
+    margin-top: 30px;
+}
+
+.about-section {
+    padding: 60px 20px;
+    text-align: center;
+}
+
+    .about-section h2 {
+        font-size: 2rem;
+        margin-bottom: 20px;
+        color: #333;
+    }
+
+    .about-section p {
+        font-size: 1.1rem;
+        color: #555;
+        max-width: 800px;
+        margin: 0 auto;
+    }
+img {
+    transition: transform 0.3s ease;
+}
+
+    img:hover {
+        transform: scale(1.03);
+    }
+
+/* Главная секция с фоном */
+
+.hero-section {
+    background-image: url('../images/main.jpg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative; /* чтобы ::before работал */
+    text-align: center;
+}
+
+    /* Затемнение фона с прозрачностью */
+    .hero-section::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(255, 255, 255, 0.6); /* белый с прозрачностью 0.5 */
+        z-index: 0;
+    }
+
+/* Контейнер для текста */
+.hero-content {
+    position: relative;
+    z-index: 1;
+    color: black; /* текст черный */
+}
+
+.navbar a {
+    color: white;
+    text-decoration: none;
+    margin-right: 15px;
+    cursor: pointer; /* добавь, если нет */
+}
+.navbar {
+    position: relative;
+    z-index: 10;
 }
