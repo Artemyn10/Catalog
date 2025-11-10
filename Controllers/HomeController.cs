@@ -14,7 +14,7 @@ namespace RecipeCatalog.Controllers
             return View();
         }
 
-        public IActionResult Contact()
+        public IActionResult Contacts()
         {
             return View();
         }
