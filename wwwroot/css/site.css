@@ -207,4 +207,95 @@ img {
     height: 50px;
     margin-bottom: 10px;
 }
+.recipes-preview-section {
+    padding: 60px 20px;
+    background-color: #fff3e0;
+    text-align: center;
+}
 
+    .recipes-preview-section h2 {
+        font-size: 2rem;
+        color: #ff8c00;
+        margin-bottom: 40px;
+    }
+
+.recipes-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 25px;
+}
+
+.recipe-preview-card {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.15);
+    overflow: hidden;
+    text-align: center;
+    padding-bottom: 15px;
+    transition: transform 0.3s ease;
+}
+
+    .recipe-preview-card:hover {
+        transform: scale(1.03);
+    }
+
+    .recipe-preview-card img {
+        width: 100%;
+        height: 170px;
+        object-fit: cover;
+    }
+
+    .recipe-preview-card h3 {
+        margin: 15px 0 10px;
+        color: #ff8c00;
+    }
+
+    .recipe-preview-card p {
+        padding: 0 15px;
+        font-size: 0.95rem;
+        color: #555;
+    }
+
+.btn-more {
+    display: inline-block;
+    margin-top: 15px;
+    padding: 8px 14px;
+    background-color: #ff8c00;
+    color: white;
+    border-radius: 8px;
+    text-decoration: none;
+}
+
+    .btn-more:hover {
+        background-color: #e67b00;
+    }
+/* Центрируем основное меню */
+.menu-center a {
+    font-size: 1.1rem;
+    padding: 6px 12px;
+}
+
+/* Правые кнопки */
+.menu-right .btn {
+    font-weight: 500;
+    border-radius: 20px;
+    padding: 5px 15px;
+    transition: 0.2s;
+}
+
+    .menu-right .btn:hover {
+        transform: scale(1.05);
+    }
+
+/* Чтобы меню красиво распределялось */
+.navigation {
+    display: flex;
+    justify-content: space-between;
+}
+footer {
+    text-align: center;
+    padding: 15px 0;
+    background-color: #ff8c00;
+    color: white;
+    margin-top: auto;
+}

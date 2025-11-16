@@ -15,34 +15,46 @@
     <!-- Наши стили -->
     <link rel="stylesheet" href="~/css/site.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    
-
 </head>
 
-<body>
+<body class="d-flex flex-column min-vh-100">
+
 
     <header>
         <div class="container d-flex justify-content-between align-items-center">
             <a class="navbar-brand text-white" href="/">Домашние рецепты</a>
-            <nav class="navbar">
-                <a class="nav-link text-white" href="/">Главная</a>
-                <a class="nav-link text-white" href="/Recipes">Рецепты</a>
-                <a class="nav-link text-white" href="/Home/Services">Услуги</a>
-                <a class="nav-link text-white" href="/Home/About">О нас</a>
-                <a class="nav-link text-white" href="/Home/Contacts">Контакты</a>
+
+            <nav class="navigation d-flex align-items-center w-100">
+
+                <!-- Центрированное меню -->
+                <div class="menu-center mx-auto d-flex gap-3">
+                    <a class="nav-link text-white" href="/">Главная</a>
+                    <a class="nav-link text-white" href="/Home/Recipes">Рецепты</a>
+                    <a class="nav-link text-white" href="/Home/Services">Услуги</a>
+                    <a class="nav-link text-white" href="/Home/About">О нас</a>
+                    <a class="nav-link text-white" href="/Home/Contacts">Контакты</a>
+                </div>
+
+                <!-- Кнопки справа -->
+                <div class="menu-right d-flex gap-2">
+                    <a class="btn btn-light btn-sm" href="/Account/Login">Войти</a>
+                    <a class="btn btn-outline-light btn-sm" href="/Account/Register">Регистрация</a>
+                </div>
+
             </nav>
+
         </div>
     </header>
-
 
     <main role="main" class="container mt-4">
         @RenderBody()
     </main>
 
-    <footer>
+    <footer class="mt-auto">
         <p>© 2025 Каталог домашних рецептов | Сделано на ASP.NET Core</p>
     </footer>
-    
+
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

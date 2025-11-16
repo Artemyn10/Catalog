@@ -1,0 +1,26 @@
+﻿@{
+    ViewData["Title"] = "Вход";
+}
+
+<h2 class="text-center mt-4">Вход</h2>
+
+<div class="container mt-4" style="max-width: 450px;">
+    <form>
+        <div class="mb-3">
+            <label class="form-label">Email</label>
+            <input type="email" class="form-control" placeholder="Введите Email">
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Пароль</label>
+            <input type="password" class="form-control" placeholder="Введите пароль">
+        </div>
+
+        <button type="submit" class="btn btn-primary w-100">Войти</button>
+
+        <div class="text-center mt-3">
+            Нет аккаунта?
+            <a href="/Account/Register">Регистрация</a>
+        </div>
+    </form>
+</div>

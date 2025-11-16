@@ -22,7 +22,10 @@ namespace RecipeCatalog.Controllers
         {
             return View();
         }
-
+        public IActionResult Recipes()
+        {
+            return View();
+        }
 
     }
 }
