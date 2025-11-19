@@ -256,6 +256,8 @@ img {
         color: #555;
     }
 
+
+
 .btn-more {
     display: inline-block;
     margin-top: 15px;
@@ -299,3 +301,91 @@ footer {
     color: white;
     margin-top: auto;
 }
+
+
+.contact-message {
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+    .contact-message h2 {
+        font-weight: 600;
+        color: #333;
+    }
+
+    .contact-message button {
+        background-color: #ff8c00;
+        border: none;
+        color: white;
+        font-weight: 500;
+    }
+
+        .contact-message button:hover {
+            background-color: #e67e00;
+        }
+.footer {
+    background-color: #ff8c00; /* тот же цвет, что и header */
+    color: #fff;
+}
+
+    .footer h5 {
+        font-weight: 700;
+    }
+
+    .footer p {
+        max-width: 350px;
+        line-height: 1.4;
+        margin-bottom: 0;
+    }
+
+.footer-nav .footer-link {
+    color: #fff;
+    font-weight: 500;
+    text-decoration: none;
+    transition: 0.2s;
+}
+
+    .footer-nav .footer-link:hover {
+        text-decoration: underline;
+        opacity: 0.8;
+    }
+
+.footer-bottom {
+    background-color: rgba(0,0,0,0.2);
+    font-size: 0.9rem;
+}
+/*  нопка "¬ойти" Ч бела€ */
+.footer-btn {
+    background-color: white;
+    color: #ff8c00;
+    font-weight: 600;
+    padding: 6px 16px;
+    border-radius: 20px;
+    text-decoration: none;
+    transition: 0.2s;
+}
+
+    .footer-btn:hover {
+        transform: scale(1.05);
+    }
+
+/*  нопка "–егистраци€" Ч прозрачна€ с белой рамкой */
+.footer-btn-outline {
+    background-color: transparent;
+    border: 2px solid white;
+    color: white;
+    font-weight: 600;
+    padding: 6px 16px;
+    border-radius: 20px;
+    text-decoration: none;
+    transition: 0.2s;
+}
+
+    .footer-btn-outline:hover {
+        transform: scale(1.05);
+        background-color: rgba(255,255,255,0.2);
+    }
+
+

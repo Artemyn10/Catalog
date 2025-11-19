@@ -50,9 +50,40 @@
         @RenderBody()
     </main>
 
-    <footer class="mt-auto">
-        <p>© 2025 Каталог домашних рецептов | Сделано на ASP.NET Core</p>
+    <footer class="footer mt-5">
+        <div class="container py-4 d-flex flex-column flex-md-row justify-content-between align-items-center">
+
+            <!-- Левая часть -->
+            <div class="footer-about mb-3 mb-md-0 text-white">
+                <h5>Каталог домашних рецептов</h5>
+                <p>
+                    Лучшие домашние блюда, проверенные рецепты, полезные советы и вкусные идеи для каждого дня.
+                </p>
+            </div>
+
+            <!-- Правая навигация -->
+            <nav class="footer-nav d-flex align-items-center gap-4">
+
+                <a href="/" class="footer-link">Главная</a>
+                <a href="/Recipes" class="footer-link">Рецепты</a>
+                <a class="nav-link text-white" class="footer-link">Услуги</a>
+                <a href="/Home/About" class="footer-link">О нас</a>
+                <a href="/Home/Contacts" class="footer-link">Контакты</a>
+
+                <!-- Кнопки -->
+                <a href="/Account/Login" class="btn footer-btn">Войти</a>
+                <a href="/Account/Register" class="btn footer-btn-outline">Регистрация</a>
+
+            </nav>
+
+        </div>
+
+        <div class="footer-bottom text-center py-2 text-white">
+            &copy; @DateTime.Now.Year Каталог домашних рецептов
+        </div>
     </footer>
+
+
 
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
