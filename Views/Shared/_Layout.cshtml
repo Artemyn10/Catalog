@@ -63,23 +63,23 @@
 
             <!-- Правая навигация -->
             <nav class="footer-nav d-flex align-items-center gap-4">
-
                 <a href="/" class="footer-link">Главная</a>
                 <a href="/Recipes" class="footer-link">Рецепты</a>
-                <a class="nav-link text-white" class="footer-link">Услуги</a>
+                <a href="/Home/Services" class="footer-link">Услуги</a>
                 <a href="/Home/About" class="footer-link">О нас</a>
                 <a href="/Home/Contacts" class="footer-link">Контакты</a>
 
-                <!-- Кнопки -->
-                <a href="/Account/Login" class="btn footer-btn">Войти</a>
-                <a href="/Account/Register" class="btn footer-btn-outline">Регистрация</a>
-
+                <!-- Вот эти две строки замени -->
+                <div class="menu-right d-flex gap-2">
+                    <a class="btn btn-light btn-sm" href="/Account/Login">Войти</a>
+                    <a class="btn btn-outline-light btn-sm" href="/Account/Register">Регистрация</a>
+                </div>
             </nav>
 
         </div>
 
         <div class="footer-bottom text-center py-2 text-white">
-            &copy; @DateTime.Now.Year Каталог домашних рецептов
+            &copy; @DateTime.Now.Year Каталог домашних рецептов | Сделано на ASP.Net Core MVC
         </div>
     </footer>
 
