@@ -4,33 +4,103 @@
 
 <h2 class="text-center mt-4">Регистрация</h2>
 
-<div class="container mt-4" style="max-width: 500px;">
-    <form>
+<div class="container mt-4" style="max-width: 450px;">
+
+    <div id="registerResult"></div>
+
+    <form id="registerForm" class="p-4 border rounded shadow-sm bg-white">
+
         <div class="mb-3">
-            <label class="form-label">Имя</label>
-            <input type="text" class="form-control" placeholder="Введите имя">
+            <label class="form-label fw-bold">Имя</label>
+            <input type="text" name="name" class="form-control" placeholder="Введите имя" required>
         </div>
 
         <div class="mb-3">
-            <label class="form-label">Email</label>
-            <input type="email" class="form-control" placeholder="Введите Email">
+            <label class="form-label fw-bold">Email</label>
+            <input type="email" name="email" class="form-control" placeholder="Введите Email" required>
         </div>
 
         <div class="mb-3">
-            <label class="form-label">Пароль</label>
-            <input type="password" class="form-control" placeholder="Введите пароль">
+            <label class="form-label fw-bold">Пароль</label>
+            <input type="password" name="password" class="form-control" placeholder="Введите пароль" required>
         </div>
 
         <div class="mb-3">
-            <label class="form-label">Повторите пароль</label>
-            <input type="password" class="form-control" placeholder="Повторите пароль">
+            <label class="form-label fw-bold">Повторите пароль</label>
+            <input type="password" name="password2" class="form-control" placeholder="Повторите пароль" required>
         </div>
 
-        <button type="submit" class="btn btn-success w-100">Зарегистрироваться</button>
+        <button type="submit" class="btn btn-warning fw-bold w-100">
+            Зарегистрироваться
+        </button>
 
         <div class="text-center mt-3">
             Уже есть аккаунт?
-            <a href="/Account/Login">Войти</a>
+            <a href="/Account/Login" class="fw-bold">Войти</a>
         </div>
+
     </form>
 </div>
+
+<script>
+    document.getElementById("registerForm").addEventListener("submit", async function (e) {
+        e.preventDefault();
+
+        const form = e.target;
+
+        const data = {
+            name: form.name.value.trim(),
+            email: form.email.value,
+            password: form.password.value,
+            password2: form.password2.value
+        };
+
+        const resultBox = document.getElementById("registerResult");
+
+        // ---- ВАЛИДАЦИЯ ИМЕНИ ----
+        if (data.name.length < 3 || data.name.length > 20) {
+            resultBox.innerHTML = `
+                    <div class="alert alert-danger text-center">
+                        Имя должно содержать от 3 до 20 символов!
+                    </div>`;
+            return;
+        }
+
+        // ---- ПРОВЕРКА ПАРОЛЯ ----
+        if (data.password !== data.password2) {
+            resultBox.innerHTML = `
+                    <div class="alert alert-danger text-center">
+                        Пароли не совпадают!
+                    </div>`;
+            return;
+        }
+
+        // ---- F E T C H  ----
+        const response = await fetch("/api/account/register", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(data)
+        });
+
+        const result = await response.json();
+
+        if (result.success) {
+            resultBox.innerHTML = `
+                    <div class="alert alert-success text-center">
+                        Регистрация успешна! Перенаправление...
+                    </div>`;
+
+            form.reset();
+
+            setTimeout(() => {
+                window.location.href = "/Account/Login";
+            }, 1500);
+
+        } else {
+            resultBox.innerHTML = `
+                    <div class="alert alert-danger text-center">
+                        ${result.error}
+                    </div>`;
+        }
+    });
+</script>
