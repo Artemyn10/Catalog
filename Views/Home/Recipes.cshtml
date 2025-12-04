@@ -4,9 +4,29 @@
 <section id="recipes" class="recipes-preview-section">
     <div class="container">
         <h2>Популярные рецепты</h2>
+        <div style="margin-bottom:20px;">
+            <a asp-action="Index" class="btn btn-outline-primary">Все</a>
+            @if (ViewBag.Categories != null)
+            {
+                foreach (var cat in ViewBag.Categories)
+                {
+                    <a asp-action="Index" asp-route-categoryId="@cat.Id"
+                       class="btn btn-outline-secondary" style="margin-left:5px;">
+                        @cat.Name
+                    </a>
+                }
+            }
 
+            @*  @foreach (var cat in ViewBag.Categories)
+            {
+            <a asp-action="Index" asp-route-categoryId="@cat.Id"
+            class="btn btn-outline-secondary" style="margin-left:5px;">
+            @cat.Name
+            </a>
+            } *@
+        </div>
         <div class="recipes-grid">
-
+            
             <div class="recipe-preview-card">
                 <img src="/images/recipes/borsh.jpg" alt="Борщ">
                 <h3>Борщ домашний</h3>

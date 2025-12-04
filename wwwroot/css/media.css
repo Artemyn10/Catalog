@@ -1,0 +1,110 @@
+﻿/* ===== МОБИЛЬНОЕ МЕНЮ ===== */
+.mobile-menu {
+    position: fixed;
+    top: 0;
+    right: -260px; /* спрятано */
+    width: 260px;
+    height: 100vh;
+    background: #ff8c00;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 30px 20px;
+    transition: right 0.35s ease-in-out;
+    z-index: 2000;
+}
+
+    .mobile-menu a {
+        color: white;
+        text-decoration: none;
+        font-size: 20px;
+    }
+
+    .mobile-menu.active {
+        right: 0;
+    }
+
+
+/* Overlay */
+.overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.55);
+    z-index: 1500;
+}
+
+    .overlay.show {
+        display: block;
+    }
+
+/* Показать бургер на телефоне */
+@media (max-width: 768px) {
+    .hamburger {
+        display: block !important;
+        font-size: 36px;
+        color: white;
+        cursor: pointer;
+        z-index: 2100;
+        margin-left: auto;
+    }
+
+    .navigation {
+        display: none !important;
+    }
+}
+@media (max-width: 768px) {
+    footer {
+        position: relative;
+    }
+
+    body {
+        padding-bottom: 40px;
+    }
+    .footer-nav {
+        flex-direction: column;
+        gap: 10px;
+        align-items: flex-start;
+        width: 100%;
+    }
+
+    .menu-right {
+        flex-direction: row;
+        justify-content: center;
+        margin-top: 10px;
+        width: 100%;
+    }
+
+    .footer-about {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+    img {
+        max-width: 100%;
+        height: auto;
+        width: auto;
+    }
+
+    .recipe-preview-card img {
+        height: auto !important;
+        object-fit: cover;
+    }
+
+    .hero-section {
+        background-size: cover;
+        height: 50vh;
+        background-position: center;
+    }
+    .about-section img {
+        max-width: 100% !important;
+        height: auto;
+    }
+    .contacts-section iframe {
+        max-width: 100% !important;
+        height: 500px;
+    }
+}
+

@@ -1,3 +1,5 @@
+using Microsoft.EntityFrameworkCore;
+
 namespace Catalog
 {
 	public class Program
@@ -6,10 +8,12 @@ namespace Catalog
 		{
 			var builder = WebApplication.CreateBuilder(args);
 
-			// Add services to the container.
-			builder.Services.AddControllersWithViews();
+            // Добавление сервисов в контейнер
+            builder.Services.AddDbContext<ApplicationDbContext>(options =>
+                options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-			var app = builder.Build();
+            builder.Services.AddControllersWithViews();
+            var app = builder.Build();
 
 			// Configure the HTTP request pipeline.
 			if (!app.Environment.IsDevelopment())
