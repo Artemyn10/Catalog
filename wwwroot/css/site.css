@@ -356,3 +356,18 @@ footer {
     background-color: rgba(0,0,0,0.2);
     font-size: 0.9rem;
 }
+.btn-logout {
+    display: inline-block;
+    padding: 8px 20px; /* отступы */
+    background-color: red; /* ярко-красный фон */
+    color: white; /* белый текст */
+    border-radius: 25px; /* скругленные края */
+    text-decoration: none; /* убрать подчеркивание */
+    font-weight: bold;
+    font-size: 14px;
+    transition: background-color 0.3s;
+}
+
+    .btn-logout:hover {
+        background-color: #c0392b; /* более темный при наведении */
+    }

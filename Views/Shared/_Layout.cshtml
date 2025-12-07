@@ -31,11 +31,27 @@
                 <a href="/Home/Services">Услуги</a>
                 <a href="/Home/About">О нас</a>
                 <a href="/Home/Contacts">Контакты</a>
-                <a href="/Account/Login">Войти</a>
-                <a href ="/Account/Register">Регистрация</a>
+                @{
+                    var username = Context.Session.GetString("Username");
+                }
+                @if (username != null)
+                {
+                    <span class="fw-bold text-dark">
+                        Привет, @username!
+                    </span>
+                    @* <a class="nav-link btn btn-danger" href="/Account/Logout">Выйти</a> *@
+                    <a class="btn btn-light btn-sm" href="/Account/Logout">Выйти</a>
+                }
+                else
+                {
+                    <a href="/Account/Login">Войти</a>
+                    <a href="/Account/Register">Регистрация</a>
+                }
             </div>
+
             <!-- Nav -->
             <nav class="navigation d-md-flex align-items-center ms-auto">
+
                 <div class="menu-center d-none d-md-flex gap-3 mx-auto">
                     <a class="nav-link text-white" href="/">Главная</a>
                     <a class="nav-link text-white" href="/Home/Recipes">Рецепты</a>
@@ -43,11 +59,34 @@
                     <a class="nav-link text-white" href="/Home/About">О нас</a>
                     <a class="nav-link text-white" href="/Home/Contacts">Контакты</a>
                 </div>
-                <div class="menu-right d-none d-md-flex gap-2">
-                    <a class="btn btn-light btn-sm" href="/Account/Login">Войти</a>
-                    <a class="btn btn-outline-light btn-sm" href="/Account/Register">Регистрация</a>
-                </div>
+
+                @* @{
+                    var username = Context.Session.GetString("Username");
+                } *@
+
+                <!-- Если пользователь вошёл -->
+                @if (username != null)
+                {
+                    <div class="d-none d-md-flex align-items-center gap-3">
+                        <span class="fw-bold text-dark">
+                            Привет, @username!
+                        </span>
+
+                        <a class="btn btn-light btn-sm" href="/Account/Logout">Выйти</a>
+                    </div>
+
+                }
+                else
+                {
+                    <!-- Если не вошёл -->
+                    <div class="menu-right d-none d-md-flex gap-2">
+                        <a class="btn btn-light btn-sm" href="/Account/Login">Войти</a>
+                        <a class="btn btn-outline-light btn-sm" href="/Account/Register">Регистрация</a>
+                    </div>
+                }
+
             </nav>
+
             
         </div>
     </header>

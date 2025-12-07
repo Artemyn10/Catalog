@@ -1,3 +1,5 @@
+using Catalog.Data;
+using Catalog.Services;
 using Microsoft.EntityFrameworkCore;
 
 namespace Catalog
@@ -13,10 +15,15 @@ namespace Catalog
                 options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 
             builder.Services.AddControllersWithViews();
-            var app = builder.Build();
+            builder.Services.AddScoped<AuthService>();
+            builder.Services.AddSession();
 
-			// Configure the HTTP request pipeline.
-			if (!app.Environment.IsDevelopment())
+
+            var app = builder.Build();
+            app.UseSession();
+
+            // Configure the HTTP request pipeline.
+            if (!app.Environment.IsDevelopment())
 			{
 				app.UseExceptionHandler("/Home/Error");
 				// The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
@@ -27,8 +34,8 @@ namespace Catalog
 			app.UseStaticFiles();
 
 			app.UseRouting();
-
-			app.UseAuthorization();
+            app.UseSession(); 
+            app.UseAuthorization();
 
 			app.MapControllerRoute(
 				name: "default",

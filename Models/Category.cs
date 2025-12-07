@@ -1,7 +1,10 @@
-﻿public class Category
+﻿namespace Catalog.Models
 {
-    public int Id { get; set; }
-    public string? Name { get; set; }
+    public class Category
+    {
+        public int Id { get; set; }
+        public string? Name { get; set; }
 
-    public List<Recipe> Recipes { get; set; } = new();
+        public List<Recipe> Recipes { get; set; } = new();
+    }
 }
