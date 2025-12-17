@@ -1,75 +1,30 @@
 ﻿@{
     ViewData["Title"] = "Вход";
 }
-
 <h2 class="text-center mt-4">Вход</h2>
-
 <div class="container mt-4" style="max-width: 450px;">
-
     <div id="loginResult"></div>
-
     <form id="loginForm" class="p-4 border rounded shadow-sm bg-white">
-
         <div class="mb-3">
             <label class="form-label fw-bold">Email</label>
-            <input type="email" name="email" class="form-control" placeholder="Введите Email" required>
+            <input type="email" id="email" name="email" class="form-control" placeholder="Введите Email" required>
+            <div class="invalid-feedback"></div>
         </div>
-
         <div class="mb-3">
             <label class="form-label fw-bold">Пароль</label>
-            <input type="password" name="password" class="form-control" placeholder="Введите пароль" required>
+            <input type="password" id="password" name="password" class="form-control" placeholder="Введите пароль" required>
+            <div class="invalid-feedback"></div>
         </div>
-
         <button type="submit" class="btn btn-warning w-100 fw-bold">
             Войти
         </button>
-
         <div class="text-center mt-3">
             Нет аккаунта?
             <a href="/Account/Register" class="fw-bold">Регистрация</a>
         </div>
-
     </form>
 </div>
 
-<script>
-    document.getElementById("loginForm").addEventListener("submit", async function (e) {
-        e.preventDefault();
-
-        const form = e.target;
-
-        const data = {
-            email: form.email.value,
-            password: form.password.value
-        };
-
-        const response = await fetch("/api/account/login", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(data)
-        });
-
-        const result = await response.json();
-
-        const box = document.getElementById("loginResult");
-
-        if (result.success) {
-            box.innerHTML = `
-                <div class="alert alert-success text-center">
-                    Успешный вход! Перенаправление...
-                </div>`;
-
-            form.reset();
-
-            setTimeout(() => {
-                window.location.href = "/";
-            }, 1200);
-
-        } else {
-            box.innerHTML = `
-                <div class="alert alert-danger text-center">
-                    ${result.error}
-                </div>`;
-        }
-    });
-</script>
+@section Scripts {
+    <script src="~/js/LoginValidation.js"></script>
+}

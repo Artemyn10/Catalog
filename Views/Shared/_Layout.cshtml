@@ -1,127 +1,158 @@
-﻿@{
-    Layout = null;
-}
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="ru">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>@ViewData["Title"] - Каталог рецептов</title>
+
     <!-- Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
-    <!-- Наши стили -->
-    <link rel="stylesheet" href="~/css/media.css" />
+
+    <!-- Стили -->
     <link rel="stylesheet" href="~/css/site.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="~/css/media.css" />
+
+    <!-- Иконки -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 </head>
+
 <body class="d-flex flex-column min-vh-100">
-    <div class="overlay"></div>
 
     <header>
-        <div class="container d-flex align-items-center justify-content-between">
-            <!-- Бренд -->
-            <a class="navbar-brand text-white" href="/">Домашние рецепты</a>
-            <!-- ГАМБУРГЕР -->
-            <div class="hamburger">&#9776;</div>
+        <div class="container d-flex align-items-center justify-content-center position-relative">
 
-            <!-- МОБИЛЬНОЕ МЕНЮ -->
-            <div class="mobile-menu">
-                <a href="/">Главная</a>
-                <a href="/Home/Recipes">Рецепты</a>
-                <a href="/Home/Services">Услуги</a>
-                <a href="/Home/About">О нас</a>
-                <a href="/Home/Contacts">Контакты</a>
-                @{
-                    var username = Context.Session.GetString("Username");
-                }
-                @if (username != null)
-                {
-                    <span class="fw-bold text-dark">
-                        Привет, @username!
-                    </span>
-                    @* <a class="nav-link btn btn-danger" href="/Account/Logout">Выйти</a> *@
-                    <a class="btn btn-light btn-sm" href="/Account/Logout">Выйти</a>
-                }
-                else
-                {
-                    <a href="/Account/Login">Войти</a>
-                    <a href="/Account/Register">Регистрация</a>
-                }
+            <!-- Бренд -->
+            <a class="navbar-brand" href="/">Домашние рецепты</a>
+
+            <!-- Гамбургер -->
+            <div class="hamburger position-absolute start-0">
+                <span></span>
+                <span></span>
+                <span></span>
             </div>
 
-            <!-- Nav -->
-            <nav class="navigation d-md-flex align-items-center ms-auto">
 
-                <div class="menu-center d-none d-md-flex gap-3 mx-auto">
-                    <a class="nav-link text-white" href="/">Главная</a>
-                    <a class="nav-link text-white" href="/Home/Recipes">Рецепты</a>
-                    <a class="nav-link text-white" href="/Home/Services">Услуги</a>
-                    <a class="nav-link text-white" href="/Home/About">О нас</a>
-                    <a class="nav-link text-white" href="/Home/Contacts">Контакты</a>
+            <!-- Навигация -->
+            <nav class="navigation">
+
+                <!-- Центр -->
+                <div class="menu-center d-flex align-items-center gap-2">
+                    <a href="/">Главная</a>
+                    <a href="/Home/Recipes">Рецепты</a>
+                    <a href="/Home/Services">Услуги</a>
+                    <a href="/Home/About">О нас</a>
+                    <a href="/Home/Contacts">Контакты</a>
+
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        if (User.IsInRole("Admin"))
+                        {
+                            <a href="/Admin" class="fw-bold text-warning">Админка</a>
+                        }
+                        else
+                        {
+                            <a href="/User/Profile" class="fw-bold text-info">Личный кабинет</a>
+                        }
+                    }
                 </div>
 
-                @* @{
-                    var username = Context.Session.GetString("Username");
-                } *@
-
-                <!-- Если пользователь вошёл -->
-                @if (username != null)
+                <!-- Право -->
+                <!-- Правый блок авторизации (десктоп и мобильный) -->
+                @if (User.Identity.IsAuthenticated)
                 {
-                    <div class="d-none d-md-flex align-items-center gap-3">
-                        <span class="fw-bold text-dark">
-                            Привет, @username!
-                        </span>
+                    <div class="dropdown">
+                        <!-- Иконка пользователя (клик открывает меню) -->
+                        <a class="dropdown-toggle text-decoration-none d-flex align-items-center gap-2" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fas fa-user-circle fa-2x text-white"></i>  <!-- Иконка аватара -->
+                            <span class="fw-bold text-white d-none d-md-inline">Привет, @User.FindFirst(System.Security.Claims.ClaimTypes.Name)?.Value!</span>
+                        </a>
 
-                        <a class="btn btn-light btn-sm" href="/Account/Logout">Выйти</a>
+                        <!-- Выпадающее меню -->
+                        <ul class="dropdown-menu dropdown-menu-end shadow border-0">
+                            <li><a class="dropdown-item" href="/User/Profile"><i class="fas fa-user me-2"></i> Профиль</a></li>
+                            <li><a class="dropdown-item" href="/User/Favorites"><i class="fas fa-heart me-2"></i> Избранное (корзина)</a></li>
+                            <li><a class="dropdown-item" href="/User/Archive"><i class="fas fa-archive me-2"></i> Архив рецептов</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li>
+                                <form asp-controller="Account" asp-action="Logout" method="post" class="d-inline">
+                                    @Html.AntiForgeryToken()
+                                    <button type="submit" class="dropdown-item text-danger"><i class="fas fa-sign-out-alt me-2"></i> Выйти</button>
+                                </form>
+                            </li>
+                        </ul>
                     </div>
-
                 }
                 else
                 {
-                    <!-- Если не вошёл -->
-                    <div class="menu-right d-none d-md-flex gap-2">
+                    <div class="d-flex gap-2">
                         <a class="btn btn-light btn-sm" href="/Account/Login">Войти</a>
                         <a class="btn btn-outline-light btn-sm" href="/Account/Register">Регистрация</a>
                     </div>
                 }
+                </div>
 
             </nav>
-
-            
         </div>
     </header>
-    <main role="main" class="container mt-4">
+
+    <main class="container my-4">
         @RenderBody()
     </main>
-    <footer class="footer mt-5">
+
+    <footer class="footer mt-auto">
         <div class="container py-4 d-flex flex-column flex-md-row justify-content-between align-items-center">
-            <!-- Левая часть -->
-            <div class="footer-about mb-3 mb-md-0 text-white">
+
+            <div class="footer-about mb-3 mb-md-0">
                 <h5>Каталог домашних рецептов</h5>
-                <p>
-                    Лучшие домашние блюда, проверенные рецепты, полезные советы и вкусные идеи для каждого дня.
-                </p>
+                <p>Лучшие домашние блюда, проверенные рецепты и идеи для каждого дня.</p>
             </div>
-            <!-- Правая навигация -->
-            <nav class="footer-nav d-flex align-items-center gap-4">
+
+            <nav class="footer-nav d-flex align-items-center gap-4 flex-wrap">
+
                 <a href="/" class="footer-link">Главная</a>
-                <a href="/Recipes" class="footer-link">Рецепты</a>
+                <a href="/Home/Recipes" class="footer-link">Рецепты</a>
                 <a href="/Home/Services" class="footer-link">Услуги</a>
                 <a href="/Home/About" class="footer-link">О нас</a>
                 <a href="/Home/Contacts" class="footer-link">Контакты</a>
-                <!-- Кнопки -->
-                <div class="menu-right d-flex gap-2">
-                    <a class="btn btn-light btn-sm" href="/Account/Login">Войти</a>
-                    <a class="btn btn-outline-light btn-sm" href="/Account/Register">Регистрация</a>
-                </div>
+
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <form asp-controller="Account"
+                          asp-action="Logout"
+                          method="post"
+                          class="d-inline">
+                        @Html.AntiForgeryToken()
+                        <button type="submit" class="btn btn-light btn-sm ms-3">
+                            Выйти
+                        </button>
+                    </form>
+                }
+                else
+                {
+                    <div class="d-flex gap-2 ms-3">
+                        <a class="btn btn-light btn-sm" href="/Account/Login">
+                            Войти
+                        </a>
+                        <a class="btn btn-outline-light btn-sm" href="/Account/Register">
+                            Регистрация
+                        </a>
+                    </div>
+                }
+
             </nav>
+
+
         </div>
-        <div class="footer-bottom text-center py-2 text-white">
-            &copy; @DateTime.Now.Year Каталог домашних рецептов | Сделано на ASP.Net Core MVC Бондарев Артем
+
+        <div class="footer-bottom">
+            &copy; @DateTime.Now.Year Каталог домашних рецептов | ASP.NET Core MVC | 
         </div>
     </footer>
-    <script src="~/js/site.js"></script>
+
+    <!-- Скрипты -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js"></script>
+
     @RenderSection("Scripts", required: false)
 
 </body>

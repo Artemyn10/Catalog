@@ -1,3 +1,4 @@
+/* ===== ОСНОВНОЕ ===== */
 body {
     font-family: "Segoe UI", sans-serif;
     background-color: #fff8f0;
@@ -8,52 +9,48 @@ header {
     color: white;
     padding: 20px 0;
     box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+    position: relative;
+    z-index: 100;
 }
 
 .navbar-brand {
     font-weight: bold;
     font-size: 1.5rem;
+    color: white;
+    text-decoration: none;
 }
 
-    .navbar a:hover {
+/* ===== НАВИГАЦИЯ ===== */
+.navigation {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.menu-center a {
+    font-size: 1.1rem;
+    padding: 6px 12px;
+    color: white;
+    text-decoration: none;
+}
+
+    .menu-center a:hover {
         text-decoration: underline;
     }
 
-footer {
-    background-color: #ff8c00;
-    color: white;
-    padding: 10px;
-    text-align: center;
-    margin-top: 30px;
+.menu-right .btn {
+    font-weight: 500;
+    border-radius: 20px;
+    padding: 5px 15px;
+    transition: 0.2s;
 }
 
-.about-section {
-    padding: 60px 20px;
-    text-align: center;
-}
-
-    .about-section h2 {
-        font-size: 2rem;
-        margin-bottom: 20px;
-        color: #333;
+    .menu-right .btn:hover {
+        transform: scale(1.05);
     }
 
-    .about-section p {
-        font-size: 1.1rem;
-        color: #555;
-        max-width: 800px;
-        margin: 0 auto;
-    }
-img {
-    transition: transform 0.3s ease;
-}
-
-    img:hover {
-        transform: scale(1.03);
-    }
-
-/* Главная секция с фоном */
-
+/* ===== HERO ===== */
 .hero-section {
     background-image: url('../images/main.jpg');
     background-size: contain;
@@ -61,76 +58,192 @@ img {
     background-position: center;
     height: 100vh;
     display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
-    position: relative; /* чтобы ::before работал */
+    position: relative;
     text-align: center;
 }
 
-    /* Затемнение фона с прозрачностью */
     .hero-section::before {
         content: "";
         position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(255, 255, 255, 0.6); /* белый с прозрачностью 0.5 */
-        z-index: 0;
+        inset: 0;
+        background: rgba(255,255,255,0.6);
     }
 
-/* Контейнер для текста */
 .hero-content {
     position: relative;
     z-index: 1;
-    color: black; /* текст черный */
+    color: black;
 }
 
-.navbar a {
-    color: white;
-    text-decoration: none;
-    margin-right: 15px;
-    cursor: pointer; /* добавь, если нет */
-}
-.navbar {
-    position: relative;
-    z-index: 10;
-}
+/* ===== СЕКЦИИ ===== */
+.about-section,
+.services-section,
 .contacts-section {
     padding: 60px 20px;
-    background-color: #fff8f0;
+    text-align: center;
 }
 
+    .about-section h2,
+    .services-section h2,
     .contacts-section h2 {
         font-size: 2rem;
         color: #333;
         margin-bottom: 15px;
     }
 
+    .about-section p,
+    .services-section p,
     .contacts-section p {
         font-size: 1.1rem;
         color: #555;
     }
 
-.contact-info p {
-    margin: 5px 0;
+/* ===== УСЛУГИ ===== */
+.services-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 25px;
 }
 
-.social-links a {
-    color: #ff8c00;
-    font-weight: bold;
+.service-card {
+    background-color: white;
+    border-radius: 15px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    padding: 25px;
+    width: 270px;
+    transition: 0.3s;
+}
+
+    .service-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    }
+
+    .service-card h3 {
+        color: #ff8c00;
+        margin-bottom: 10px;
+    }
+
+/* ===== РЕЦЕПТЫ ===== */
+.recipes-preview-section {
+    padding: 60px 20px;
+    background-color: #fff3e0;
+    text-align: center;
+}
+
+.recipes-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 25px;
+}
+
+.recipe-preview-card {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.15);
+    overflow: hidden;
+    transition: 0.3s;
+}
+
+    .recipe-preview-card:hover {
+        transform: scale(1.03);
+    }
+
+    .recipe-preview-card img {
+        width: 100%;
+        height: 170px;
+        object-fit: cover;
+    }
+
+    .recipe-preview-card h3 {
+        margin: 15px 0 10px;
+        color: #ff8c00;
+    }
+
+/* ===== КНОПКИ ===== */
+.btn-more {
+    display: inline-block;
+    margin-top: 15px;
+    padding: 8px 14px;
+    background-color: #ff8c00;
+    color: white;
+    border-radius: 8px;
     text-decoration: none;
 }
 
-    .social-links a:hover {
+    .btn-more:hover {
+        background-color: #e67b00;
+    }
+
+/* ===== FOOTER ===== */
+.footer {
+    background-color: #ff8c00;
+    color: white;
+    margin-top: auto;
+}
+
+.footer-nav .footer-link {
+    color: white;
+    text-decoration: none;
+}
+
+    .footer-nav .footer-link:hover {
         text-decoration: underline;
     }
 
-.map iframe {
-    border-radius: 10px;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.2);
-    margin-top: 20px;
+.footer-bottom {
+    background-color: rgba(0,0,0,0.2);
+    font-size: 0.9rem;
+    padding: 10px;
+    text-align: center;
+}
+
+/* ===== КАРТИНКИ ===== */
+img {
+    transition: transform 0.3s ease;
+}
+
+    img:hover {
+        transform: scale(1.03);
+    }
+/* ===== HEADER GRID ===== */
+.header-grid {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+}
+
+/* Левая зона */
+.header-left {
+    justify-self: start;
+}
+
+/* Центр — СТРОГО по центру экрана */
+.menu-center {
+    justify-self: center;
+    display: flex;
+    gap: 24px;
+}
+
+/* Правая зона */
+.header-right {
+    justify-self: end;
+    display: flex;
+    gap: 10px;
+}
+
+/* Ссылки */
+.menu-center a {
+    color: white;
+    text-decoration: none;
+    font-size: 1.1rem;
+}
+
+.menu-center a:hover {
+    text-decoration: underline;
 }
 .social-links {
     display: flex;
@@ -156,218 +269,38 @@ img {
         color: #d2691e;
         transform: scale(1.1);
     }
-.services-section {
-    padding: 60px 20px;
-    background-color: #fff8f0;
+
+/* Стили для пользовательского dropdown */
+.dropdown-toggle::after {
+    display: none; /* Убираем стрелку Bootstrap */
 }
 
-    .services-section h2 {
-        font-size: 2rem;
-        color: #333;
-        margin-bottom: 15px;
-    }
-
-    .services-section p {
-        font-size: 1.1rem;
-        color: #555;
-        margin-bottom: 40px;
-    }
-
-.services-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 25px;
+.dropdown-menu {
+    min-width: 220px; /* Ширина меню */
+    background-color: #fff8f0; /* Фон как в body для consistency */
+    border: 1px solid #ff8c00;
 }
 
-.service-card {
-    background-color: white;
-    border-radius: 15px;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-    padding: 25px;
-    width: 270px;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+.dropdown-item {
+    color: #333;
+    font-weight: 500;
 }
 
-    .service-card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    .dropdown-item:hover {
+        background-color: #ff8c00;
+        color: white;
     }
 
-    .service-card h3 {
-        color: #ff8c00;
-        margin-bottom: 10px;
+    .dropdown-item .fas {
+        width: 20px; /* Фиксированная ширина иконок */
+        text-align: center;
     }
 
-    .service-card p {
-        color: #555;
-    }
-.service-icon {
-    width: 50px;
-    height: 50px;
-    margin-bottom: 10px;
-}
-.recipes-preview-section {
-    padding: 60px 20px;
-    background-color: #fff3e0;
-    text-align: center;
-}
-
-    .recipes-preview-section h2 {
-        font-size: 2rem;
-        color: #ff8c00;
-        margin-bottom: 40px;
-    }
-
-.recipes-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 25px;
-}
-
-.recipe-preview-card {
-    background: white;
-    border-radius: 12px;
-    box-shadow: 0 3px 10px rgba(0,0,0,0.15);
-    overflow: hidden;
-    text-align: center;
-    padding-bottom: 15px;
+/* Иконка аватара в шапке */
+.fa-user-circle {
     transition: transform 0.3s ease;
 }
 
-    .recipe-preview-card:hover {
-        transform: scale(1.03);
-    }
-
-    .recipe-preview-card img {
-        width: 100%;
-        height: 170px;
-        object-fit: cover;
-    }
-
-    .recipe-preview-card h3 {
-        margin: 15px 0 10px;
-        color: #ff8c00;
-    }
-
-    .recipe-preview-card p {
-        padding: 0 15px;
-        font-size: 0.95rem;
-        color: #555;
-    }
-
-
-
-.btn-more {
-    display: inline-block;
-    margin-top: 15px;
-    padding: 8px 14px;
-    background-color: #ff8c00;
-    color: white;
-    border-radius: 8px;
-    text-decoration: none;
+.dropdown-toggle:hover .fa-user-circle {
+    transform: scale(1.1);
 }
-
-    .btn-more:hover {
-        background-color: #e67b00;
-    }
-/* Центрируем основное меню */
-.menu-center a {
-    font-size: 1.1rem;
-    padding: 6px 12px;
-}
-
-/* Правые кнопки */
-.menu-right .btn {
-    font-weight: 500;
-    border-radius: 20px;
-    padding: 5px 15px;
-    transition: 0.2s;
-}
-
-    .menu-right .btn:hover {
-        transform: scale(1.05);
-    }
-
-/* Чтобы меню красиво распределялось */
-.navigation {
-    display: flex;
-    justify-content: space-between;
-}
-footer {
-    text-align: center;
-    padding: 15px 0;
-    background-color: #ff8c00;
-    color: white;
-    margin-top: auto;
-}
-
-
-.contact-message {
-    background: white;
-    padding: 30px;
-    border-radius: 10px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-}
-
-    .contact-message h2 {
-        font-weight: 600;
-        color: #333;
-    }
-
-    .contact-message button {
-        background-color: #ff8c00;
-        border: none;
-        color: white;
-        font-weight: 500;
-    }
-
-        .contact-message button:hover {
-            background-color: #e67e00;
-        }
-.footer {
-    background-color: #ff8c00; /* тот же цвет, что и header */
-    color: #fff;
-}
-
-    .footer h5 {
-        font-weight: 700;
-    }
-
-    .footer p {
-        max-width: 350px;
-        line-height: 1.4;
-        margin-bottom: 0;
-    }
-
-.footer-nav .footer-link {
-    color: #fff;
-    font-weight: 500;
-    text-decoration: none;
-    transition: 0.2s;
-}
-
-    .footer-nav .footer-link:hover {
-        text-decoration: underline;
-        opacity: 0.8;
-    }
-
-.footer-bottom {
-    background-color: rgba(0,0,0,0.2);
-    font-size: 0.9rem;
-}
-.btn-logout {
-    display: inline-block;
-    padding: 8px 20px; /* отступы */
-    background-color: red; /* ярко-красный фон */
-    color: white; /* белый текст */
-    border-radius: 25px; /* скругленные края */
-    text-decoration: none; /* убрать подчеркивание */
-    font-weight: bold;
-    font-size: 14px;
-    transition: background-color 0.3s;
-}
-
-    .btn-logout:hover {
-        background-color: #c0392b; /* более темный при наведении */
-    }
