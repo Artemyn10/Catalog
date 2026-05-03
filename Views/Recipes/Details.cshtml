@@ -1,4 +1,4 @@
-﻿@model Recipe
+﻿@* @model Recipe
 
 @{
     ViewData["Title"] = "Details";
@@ -57,4 +57,118 @@
 <div>
     <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
     <a asp-action="Index">Back to List</a>
+</div>
+ *@
+
+@model Catalog.Models.Recipe
+
+@{
+    ViewData["Title"] = "Детали рецепта";
+}
+
+<div class="container mt-4">
+    <h1 class="text-center mb-4">@Model.Title</h1>
+
+    <div class="card shadow-sm">
+        <div class="card-body">
+            <!-- Фото рецепта -->
+            @if (Model.Photos.Any())
+            {
+                <img src="@Model.Photos.First().PhotoUrl" class="img-fluid rounded mb-4" alt="@Model.Title" style="max-height: 400px; object-fit: cover; width: 100%;" />
+            }
+            else
+            {
+                <img src="~/images/placeholder.jpg" class="img-fluid rounded mb-4" alt="@Model.Title" style="max-height: 400px; object-fit: cover; width: 100%;" />
+            }
+
+            <dl class="row">
+                <dt class="col-sm-2">Описание</dt>
+                <dd class="col-sm-10">@Model.Description</dd>
+
+                <dt class="col-sm-2">Время приготовления</dt>
+                <dd class="col-sm-10">@Model.CookingTime минут</dd>
+
+                <dt class="col-sm-2">Сложность</dt>
+                <dd class="col-sm-10">@Model.Difficulty</dd>
+
+                <dt class="col-sm-2">Дата добавления</dt>
+                <dd class="col-sm-10">@Model.CreatedAt.ToString("dd.MM.yyyy")</dd>
+
+                <dt class="col-sm-2">Автор</dt>
+                <dd class="col-sm-10">@Model.User.Username</dd>
+
+                <dt class="col-sm-2">Категория</dt>
+                <dd class="col-sm-10">@Model.Category.Name</dd>
+            </dl>
+
+            <!-- Ингредиенты -->
+            <h5 class="mt-4">Ингредиенты</h5>
+            @if (Model.Ingredients.Any())
+            {
+                <ul class="list-group mb-4">
+                    @foreach (var ingredient in Model.Ingredients)
+                    {
+                        <li class="list-group-item">@ingredient.Quantity @ingredient.Unit @ingredient.Name</li>
+                    }
+                </ul>
+            }
+            else
+            {
+                <p class="text-muted">Ингредиенты не указаны.</p>
+            }
+
+            <!-- Шаги приготовления -->
+            
+            <h5 class="mt-4">Приготовление</h5>
+            @if (Model.Steps.Any())
+            {
+                <ol class="list-group list-group-numbered mb-4">
+                    @foreach (var step in Model.Steps.OrderBy(s => s.StepNumber))
+                    {
+                        <li class="list-group-item">@step.Text</li>  <!-- Изменено с Description на Text -->
+                    }
+                </ol>
+            }
+            else
+            {
+                <p class="text-muted">Шаги приготовления не указаны.</p>
+            }
+
+            <!-- Кнопка избранного -->
+            @if (User.Identity.IsAuthenticated)
+            {
+                var currentUserId = int.Parse(User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value ?? "0");
+                var isFavorite = Model.FavoritedByUsers.Any(u => u.Id == currentUserId);
+
+                <form asp-controller="Favorites" asp-action="ToggleFavorite" method="post" class="mt-4">
+                    <input type="hidden" name="recipeId" value="@Model.Id" />
+                    <button type="submit" class="btn btn-orange btn-lg">
+                        @if (isFavorite)
+                        {
+                            <i class="fas fa-heart text-danger me-2"> Удалить из избранного</i>
+                           
+                            }
+                        else
+                        {
+                            <i class="far fa-heart me-2">Добавить в избранное</i>
+                            
+                        }
+                    </button>
+                </form>
+
+                @if (TempData["Message"] != null)
+                {
+                    <div class="alert alert-info mt-3">@TempData["Message"]</div>
+                }
+            }
+        </div>
+    </div>
+
+    <div class="mt-4 text-center">
+        @if (User.Identity.IsAuthenticated && Model.UserId == int.Parse(User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value ?? "0"))
+        {
+            <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning me-2">Редактировать</a>
+        }
+        <a asp-action="Index" class="btn btn-secondary">Назад к списку</a>
+    </div>
 </div>

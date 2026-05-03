@@ -1,4 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;  // Для [Key] и [Required]
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace Catalog.Models
 {
@@ -21,12 +21,12 @@ namespace Catalog.Models
         public string Role { get; set; } = "User";
 
         public List<Recipe> Recipes { get; set; } = new();
+        public List<Recipe> FavoriteRecipes { get; set; } = new();
+        public bool EmailConfirmed { get; set; } = false;
+        public string? ConfirmationToken { get; set; }
+        public DateTime? ConfirmationTokenExpiry { get; set; }
 
-        // Новые поля для подтверждения email
-        public bool EmailConfirmed { get; set; } = false;  // Статус подтверждения
-
-        public string? ConfirmationToken { get; set; }  // Одноразовый токен
-
-        public DateTime? ConfirmationTokenExpiry { get; set; }  // Срок действия токена (24 часа)
+        // Новое поле для аватара
+        public string? AvatarUrl { get; set; } = null;
     }
 }

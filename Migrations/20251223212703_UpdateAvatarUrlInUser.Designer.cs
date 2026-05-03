@@ -3,6 +3,7 @@ using System;
 using Catalog.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Catalog.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20251223212703_UpdateAvatarUrlInUser")]
+    partial class UpdateAvatarUrlInUser
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -49,27 +52,24 @@ namespace Catalog.Migrations
                     b.Property<int?>("CategoryId")
                         .HasColumnType("integer");
 
-                    b.Property<int>("CookingTime")
+                    b.Property<int?>("CookingTime")
                         .HasColumnType("integer");
 
-                    b.Property<DateTime>("CreatedAt")
+                    b.Property<DateTime?>("CreatedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("timestamp with time zone")
                         .HasDefaultValueSql("CURRENT_TIMESTAMP");
 
                     b.Property<string>("Description")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("Difficulty")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("Title")
-                        .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<int>("UserId")
+                    b.Property<int?>("UserId")
                         .HasColumnType("integer");
 
                     b.HasKey("Id");
@@ -89,20 +89,14 @@ namespace Catalog.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("Name")
-                        .IsRequired()
+                    b.Property<string>("Amount")
                         .HasColumnType("text");
 
-                    b.Property<string>("Quantity")
-                        .IsRequired()
+                    b.Property<string>("IngredientName")
                         .HasColumnType("text");
 
                     b.Property<int>("RecipeId")
                         .HasColumnType("integer");
-
-                    b.Property<string>("Unit")
-                        .IsRequired()
-                        .HasColumnType("text");
 
                     b.HasKey("Id");
 
@@ -119,12 +113,11 @@ namespace Catalog.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("PhotoUrl")
-                        .IsRequired()
-                        .HasColumnType("text");
-
                     b.Property<int>("RecipeId")
                         .HasColumnType("integer");
+
+                    b.Property<string>("Url")
+                        .HasColumnType("text");
 
                     b.HasKey("Id");
 
@@ -201,33 +194,15 @@ namespace Catalog.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("RecipeUser", b =>
-                {
-                    b.Property<int>("FavoriteRecipesId")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("FavoritedByUsersId")
-                        .HasColumnType("integer");
-
-                    b.HasKey("FavoriteRecipesId", "FavoritedByUsersId");
-
-                    b.HasIndex("FavoritedByUsersId");
-
-                    b.ToTable("UserFavorites", (string)null);
-                });
-
             modelBuilder.Entity("Catalog.Models.Recipe", b =>
                 {
                     b.HasOne("Catalog.Models.Category", "Category")
                         .WithMany("Recipes")
-                        .HasForeignKey("CategoryId")
-                        .OnDelete(DeleteBehavior.SetNull);
+                        .HasForeignKey("CategoryId");
 
                     b.HasOne("Catalog.Models.User", "User")
                         .WithMany("Recipes")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("UserId");
 
                     b.Navigation("Category");
 
@@ -265,21 +240,6 @@ namespace Catalog.Migrations
                         .IsRequired();
 
                     b.Navigation("Recipe");
-                });
-
-            modelBuilder.Entity("RecipeUser", b =>
-                {
-                    b.HasOne("Catalog.Models.Recipe", null)
-                        .WithMany()
-                        .HasForeignKey("FavoriteRecipesId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Catalog.Models.User", null)
-                        .WithMany()
-                        .HasForeignKey("FavoritedByUsersId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("Catalog.Models.Category", b =>

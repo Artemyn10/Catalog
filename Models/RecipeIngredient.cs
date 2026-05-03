@@ -1,15 +1,12 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-namespace Catalog.Models
+﻿namespace Catalog.Models
 {
     public class RecipeIngredient
     {
         public int Id { get; set; }
-
-        [ForeignKey("Recipe")]  // ✅ Явно указываем, что это внешний ключ к свойству Recipe
+        public string Quantity { get; set; } = string.Empty;
+        public string Unit { get; set; } = string.Empty;
+        public string Name { get; set; } = string.Empty;
         public int RecipeId { get; set; }
-        public string? IngredientName { get; set; }
-        public string? Amount { get; set; }
-
-        public Recipe Recipe { get; set; }
+        public Recipe Recipe { get; set; } = null!;
     }
 }
